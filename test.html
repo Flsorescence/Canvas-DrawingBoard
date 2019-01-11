@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas实现简易涂鸦板</title>
+    <script type="text/javascript" src='js/jquery.js'></script>
+    <style>
+        .ul , li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            float: left;
+        }
+
+        #tools{
+            width: 100%;
+            height: 40px;
+            text-align: center;
+        }
+
+        .a{
+            width: 30px;
+            height: 30px;
+            margin-top: 5px;
+            margin-left: 20px;
+        }
+
+        .size{
+            width: 30px;
+            height: 30px;
+        }
+
+        #sizebutton{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        #sizebutton-ul{
+            display: none;
+            position: absolute;
+            padding: 15px;
+        }
+
+        #sizebutton-ul> li{
+            float: none;
+            z-index: 1;
+        }
+
+        #colorbutton{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        #colorbutton-ul{
+            display: none;
+            position: absolute;
+            padding: 15px;
+        }
+
+        #colorbutton-ul> li{
+            float: none;
+            z-index: 1;
+        }
+
+        #openFile{
+            display: inline-block;
+            top:0;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        #inputFile{
+            position: absolute;
+            margin: 0px;
+            width: 30px;
+            margin-top: 10px;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer;
+        }
+
+        #buttonImg{
+            position: absolute;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+        }
+
+        #container{
+            width: 100%;
+            height: 900px;
+            text-align: center;
+        }
+        #canvas{
+            /*width: 1000px;*/
+            /*height: 1000px;*/
+            border: 5px solid whitesmoke;
+        }
+
+        #mytext{
+            position: absolute;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="tools">
+        <img class="a" src="./icon/pen.png" onclick="choosePen()"/>
+        <div id="sizebutton">
+            <img class="a" src="icon/1.png" onclick="SizeTools()"/>
+            <ul id="sizebutton-ul">
+                <li><img class="size" src="icon/1.png" onclick="showSize(1)"></li>
+                <li><img class="size" src="icon/3.png" onclick="showSize(3)"></li>
+                <li><img class="size" src="icon/5.png" onclick="showSize(5)"></li>
+                <li><img class="size" src="icon/7.png" onclick="showSize(7)"></li>
+            </ul>
+        </div>
+        <div id="colorbutton">
+            <img class="a" src="./icon/colorboard.png" onclick="ColorTools()"/>
+            <ul id="colorbutton-ul">
+                <li><img class="size" src="icon/red.png" onclick="chooseColor('#d81e06')"></li>
+                <li><img class="size" src="icon/yellow.png" onclick="chooseColor('#f4ea2a')"></li>
+                <li><img class="size" src="icon/green.png" onclick="chooseColor('#1afa29')"></li>
+                <li><img class="size" src="icon/skyblue.png" onclick="chooseColor('#1296db')"></li>
+                <li><img class="size" src="icon/deepblue.png" onclick="chooseColor('#13227a')"></li>
+                <li><img class="size" src="icon/black.png" onclick="chooseColor('#000000')"></li>
+            </ul>
+        </div>
+        <img class="a" src="./icon/eraser.png" onclick="chooseEraser()"/>
+        <img class="a"src="./icon/line.png" onclick="drawLine()"/>
+        <img class="a" src="./icon/juxing.png" onclick="drawRectangle()"/>
+        <img class="a" src="./icon/yuanxing.png" onclick="drawCycle()"/>
+        <img class="a" src="./icon/wenzi.png" onclick="putText()"/>
+        <div id="openFile">
+            <img id="buttonImg" src="./icon/tupian.png" />
+            <input id="inputFile" type="file" id="file_input"/>
+        </div>
+        <img class="a" src="./icon/xuanzhuan.png" onclick="rotateImg()"/>
+        <img class="a" src="./icon/save.png" onclick="saveImg()"/>
+    </div>
+    <div id="container">
+        <canvas id="canvas" width="1800" height="880"></canvas>
+        <!--<input id="mytext" type="text"/>-->
+        <textarea id="mytext"></textarea>
+    </div>
+</body>
+    <script type="text/javascript" src="js/draw.js"></script>
+</html>
